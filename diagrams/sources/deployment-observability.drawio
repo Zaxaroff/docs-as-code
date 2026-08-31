@@ -1,0 +1,118 @@
+<mxfile host="Electron">
+  <diagram name="Deployment + Observability" id="deployObs01">
+    <mxGraphModel dx="2038" dy="1185" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2300" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k8s" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#C0392B;dashed=1;dashPattern=8 4;verticalAlign=top;align=left;fontColor=#7B241C;fontStyle=1;fontSize=13;spacingLeft=12;spacingTop=8;" value="Kubernetes-кластер: узлы распределены по ≥2 зонам доступности (отказоустойчивость НФТ п.3)" vertex="1">
+          <mxGeometry height="550" width="1720" x="10" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="v8nHJt6G5-M41N1T8v7U-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#C0392B;dashed=1;dashPattern=8 4;verticalAlign=top;align=left;fontColor=#7B241C;fontStyle=1;fontSize=13;spacingLeft=12;spacingTop=8;" value="namespace sudp (бизнес-сервисы)" vertex="1">
+          <mxGeometry height="420" width="1300" x="20" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="t1" parent="1" style="text;html=1;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" value="Deployment + Observability СУДП" vertex="1">
+          <mxGeometry height="40" width="900" x="20" as="geometry" />
+        </mxCell>
+        <mxCell id="git" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Git-репозиторий&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;исходный код СУДП&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ci" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C0392B;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#7B241C;" value="&lt;b&gt;CI: build + test&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;сборка, юнит/интеграционные тесты&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="300" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="registry" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Container Registry&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;образы сервисов&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="580" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C0392B;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#7B241C;" value="&lt;b&gt;CD: blue-green / canary&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;деплой без даунтайма НФТ п.11&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="240" x="860" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="e-git-ci" edge="1" parent="1" source="git" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;" target="ci" value="push">
+          <mxGeometry relative="1" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ci-reg" edge="1" parent="1" source="ci" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;" target="registry" value="образ">
+          <mxGeometry relative="1" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-reg-cd" edge="1" parent="1" source="registry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;" target="cd" value="деплой">
+          <mxGeometry relative="1" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-cd-k8s" edge="1" parent="1" source="cd" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;strokeColor=#C0392B;fontColor=#C0392B;" target="k8s" value="откат ≤5 мин при ошибке">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="320" />
+              <mxPoint x="980" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwpods" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;API Gateway&lt;/b&gt; (pods х2+)&lt;div style=&quot;font-size:10px&quot;&gt;см. Container diagram&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="380" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="corepods" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Core Backend Service&lt;/b&gt; (pods)&lt;div style=&quot;font-size:10px&quot;&gt;см. Container diagram&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="60" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="intpods" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Integration Service&lt;/b&gt; (pods)&lt;div style=&quot;font-size:10px&quot;&gt;см. Container diagram&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="700" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="notifpod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Notifications Service&lt;/b&gt; (pod)&lt;div style=&quot;font-size:10px&quot;&gt;см. Container diagram&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="1020" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="hpaNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#C0392B;fontColor=#7B241C;align=left;spacingLeft=6;dashed=1;fontSize=10;" value="Horizontal Pod Autoscaler:&amp;nbsp;&lt;div&gt;горизонтальный автоскейлинг pod&#39;ов Gateway/Core/Integration по CPU и очереди запросов: эффективное использование ресурсов (НФТ п.12), адаптивность (п.18)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Все сервисы контейнеризованы (Docker) + декларативные манифесты (Helm)&lt;div&gt;переносимость: новое окружение ≤1 день (НФТ п.16)&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="920" x="60" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="configpod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Config Service&lt;/b&gt; (pod)&lt;div style=&quot;font-size:10px&quot;&gt;см. Container diagram&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="60" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="brokerpods" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Message Broker&lt;/b&gt; (RabbitMQ)&lt;div style=&quot;font-size:10px&quot;&gt;StatefulSet, ≥2 узла&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="380" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="cachepod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" value="&lt;b&gt;Cache&lt;/b&gt; (Redis)&lt;div style=&quot;font-size:10px&quot;&gt;StatefulSet&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="700" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="dbZone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;verticalAlign=top;align=center;fontStyle=1;fontSize=14;spacingTop=6;" value="Управляемая БД (вне кластера)" vertex="1">
+          <mxGeometry height="190" width="1050" x="10" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="dbPrimary" parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;" value="&lt;b&gt;Core DB (primary)&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;PostgreSQL&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="260" x="80" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="dbReplica" parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#C0392B;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#7B241C;dashed=1;" value="&lt;b&gt;Core DB (read-реплика)&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;T6 НФТ п.21&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="260" x="440" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="dbOther" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#001DBC;" value="&lt;b&gt;Integration DB, Person DB,&lt;br&gt;Notifications DB&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;та же схема управляемой БД&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="260" x="780" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="e-db-repl" edge="1" parent="1" source="dbPrimary" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;strokeColor=#C0392B;fontColor=#C0392B;dashed=1;" target="dbReplica" value="репликация">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-core-db" edge="1" parent="1" source="corepods" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;exitX=0;exitY=0.5;entryX=0.5;entryY=0;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="dbPrimary" value="SQL">
+          <mxGeometry relative="1" x="0.6885" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="35" y="465" />
+              <mxPoint x="35" y="890" />
+              <mxPoint x="210" y="890" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="obsZone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#C0392B;dashed=1;verticalAlign=top;align=left;fontColor=#7B241C;fontStyle=1;fontSize=13;spacingLeft=10;spacingTop=8;" value="namespace Observability НФТ п.10 (инфраструктура для наблюдения)&lt;div&gt;&lt;span style=&quot;font-size: 10px; font-weight: 400; text-align: center; white-space: nowrap; color: light-dark(rgb(255, 140, 128), rgb(255, 140, 128));&quot;&gt;метрики/логи/трассировка (диагностика ≤15 мин)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="510" width="340" x="1370" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="prom" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C0392B;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#7B241C;" value="&lt;b&gt;Prometheus + Grafana&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;метрики, дашборды&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="280" x="1400" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="loki" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C0392B;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#7B241C;" value="&lt;b&gt;Loki/ELK&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;централизованные логи&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="280" x="1400" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="jaeger" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C0392B;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#7B241C;" value="&lt;b&gt;&amp;nbsp;OpenTelemetry(сбор) +&amp;nbsp;&lt;/b&gt;&lt;b&gt;Jaeger(хранение/просмотр)&lt;/b&gt;&lt;div style=&quot;font-size:10px&quot;&gt;распределённая трассировка&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="280" x="1400" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#999999;align=left;spacingLeft=8;fontSize=11;" value="&lt;b&gt;Легенда&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#1061B0&quot;&gt;■&lt;/font&gt; Сервис/БД - соответствует Container diagram&lt;br&gt;&lt;font color=&quot;#C0392B&quot;&gt;■&lt;/font&gt; Инфраструктура/практика - новое по таблице НФТ" vertex="1">
+          <mxGeometry height="60" width="480" x="20" y="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
