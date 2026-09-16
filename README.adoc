@@ -11,7 +11,7 @@ toc::[]
 ....
 README.adoc - этот документ (вся содержательная часть)
 diagrams/ - экспортированные PNG всех диаграмм архитектуры
-diagrams/sources/ - исходники диаграмм (.puml, .drawio)
+diagrams/sources/ - исходники диаграмм (.puml, .drawio, .svg)
 roadmap/ - диаграмма Ганта проекта
 ....
 
