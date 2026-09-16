@@ -449,7 +449,7 @@ image::diagrams/c4-container-nfr.png[C4 Container diagram с НФТ overlay]
 
 image::diagrams/c4-context-security.png[C4 Context + Security overlay]
 
-Из трех рассмотренных фреймворков (ENISA IAF, NIST CSF, ISO/IEC 27001) выбран *ENISA Information Assurance Framework*: у него, в отличие от остальных, есть выделенный домен про доверие к третьим сторонам (Third-Party Assurance), что напрямую закрывает архитектурные риски AR-2 и AR-5 (строки реестра R-01 и R-02), а по своей природе IAF фреймворк оценки уверенности, что ближе к самому ATAM.
+Из трех рассмотренных фреймворков (ENISA IAF, NIST CSF, ISO/IEC 27001) выбран *ENISA Information Assurance Framework*: у него, в отличие от остальных, есть выделенный домен про доверие к третьим сторонам (Third-Party Assurance), что напрямую закрывает архитектурный риск AR-2 - «нет SLA с владельцами внутренних систем» (строка реестра R-01), а по своей природе IAF фреймворк оценки уверенности, что ближе к самому ATAM.
 
 [cols="3,4,3", options="header"]
 |===
